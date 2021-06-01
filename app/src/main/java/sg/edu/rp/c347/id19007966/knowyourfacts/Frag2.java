@@ -50,6 +50,8 @@ public class Frag2 extends Fragment implements RssReader.RssCallback {
             public void onClick(View v) {
                 Random r = new Random();
                 view.setBackgroundColor(Color.rgb(r.nextInt(256), r.nextInt(256), r.nextInt(256)));
+                btnChange1.setBackgroundColor(Color.rgb(r.nextInt(256), r.nextInt(256), r.nextInt(256)));
+                btnChangeRSS.setBackgroundColor(Color.rgb(r.nextInt(256), r.nextInt(256), r.nextInt(256)));
             }
         });
 
