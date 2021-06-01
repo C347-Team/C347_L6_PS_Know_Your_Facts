@@ -5,60 +5,33 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.crazyhitty.chdev.ks.rssmanager.*;
+
+import java.util.List;
 import java.util.Random;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Frag2#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class Frag2 extends Fragment {
+public class Frag2 extends Fragment implements RssReader.RssCallback {
 
-    Button btnChange1;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    Button btnChange1, btnChangeRSS;
+    RssReader rssReader;
+    TextView tvTitle, tvContents;
 
     public Frag2() {
         // Required empty public constructor
+        rssReader = new RssReader(this);
+        loadFeeds();
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Frag2.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Frag2 newInstance(String param1, String param2) {
-        Frag2 fragment = new Frag2();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    void loadFeeds() {
+        String[] rssURL = {"https://www.channelnewsasia.com/rssfeeds/8395986", "https://www.singstat.gov.sg/rss"};
+        rssReader.loadFeeds(rssURL);
     }
 
     @Override
@@ -68,6 +41,9 @@ public class Frag2 extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_frag2, container, false);
 
         btnChange1 = (Button) view.findViewById(R.id.btnChange1);
+        btnChangeRSS = view.findViewById(R.id.btnChangeRSS);
+        tvTitle = view.findViewById(R.id.textViewTitle2);
+        tvContents = view.findViewById(R.id.textViewContent2);
 
         btnChange1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +53,27 @@ public class Frag2 extends Fragment {
             }
         });
 
+        btnChangeRSS.setOnClickListener((View v) -> {
+            loadFeeds();
+        });
+
         return view;
+    }
+
+    @Override
+    public void rssFeedsLoaded(List<RSS> rssList) {
+        RSS randomRSSFeed = rssList.get(new Random().nextInt(rssList.size()));
+        List<Channel.Item> items = randomRSSFeed.getChannel().getItems();
+        Channel.Item item = items.get(new Random().nextInt(items.size()));
+        String title = item.getTitle();
+        String description = item.getDescription();
+        tvTitle.setText(title);
+        tvContents.setText(description);
+
+    }
+
+    @Override
+    public void unableToReadRssFeeds(String errorMessage) {
+        Log.e("rssFail", errorMessage);
     }
 }

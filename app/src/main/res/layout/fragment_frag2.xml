@@ -13,11 +13,23 @@
         android:textSize="20dp"
         android:text="Push into the crocodile's eyeballs to let you go." />
 
+    <TextView
+        android:id="@+id/textViewTitle2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="34sp" />
+
+    <TextView
+        android:id="@+id/textViewContent2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnChange1"
@@ -25,6 +37,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:text="Change Color" />
+
+        <Button
+            android:id="@+id/btnChangeRSS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Random RSS" />
     </LinearLayout>
 
 
