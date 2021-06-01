@@ -10,6 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
         android:text="Fleas can jump up to 200 times their height, equivalent to man jumping the Empire State Building." />
 
     <LinearLayout

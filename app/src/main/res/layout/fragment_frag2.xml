@@ -10,6 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
         android:text="Push into the crocodile's eyeballs to let you go." />
 
     <LinearLayout
