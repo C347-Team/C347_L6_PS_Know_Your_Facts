@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.jsibbold.zoomage.ZoomageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.Random;
@@ -23,7 +24,7 @@ import java.util.Random;
 public class Frag1 extends Fragment {
 
     Button btnChange;
-    ImageView iv;
+    ZoomageView iv;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,7 +74,7 @@ public class Frag1 extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_frag1, container, false);
 
         btnChange = view.findViewById(R.id.btnChange);
-        iv = view.findViewById(R.id.iv);
+        iv = view.findViewById(R.id.zoomTrivia);
 
         String imageUrl = "https://wtffunfact.com/wp-content/uploads/2021/05/WTF-Fun-Fact-Presidents-Without-Pets.png";
         Picasso.with(getContext()).load(imageUrl).into(iv);
