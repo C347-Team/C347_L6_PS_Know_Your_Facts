@@ -7,7 +7,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         viewPager = findViewById(R.id.viewpager1);
         btnReadLater = findViewById(R.id.btnBack);
 
@@ -39,10 +41,29 @@ public class MainActivity extends AppCompatActivity {
         al.add(new Frag2());
         al.add(new Frag3());
 
-
         adapter = new FactsFragmentPagerAdapter(fm, al);
 
         viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(sharedPreferences.getInt("pagePosition", 0), true);
+
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("pagePosition", position);
+                editor.apply();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         btnReadLater.setOnClickListener(new View.OnClickListener() {
             @Override

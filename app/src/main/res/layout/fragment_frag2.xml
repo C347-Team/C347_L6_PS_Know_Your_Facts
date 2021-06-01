@@ -17,14 +17,15 @@
         android:id="@+id/textViewTitle2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginTop="10dp"
+        android:text="Loading Article..."
         android:textSize="34sp" />
 
     <TextView
         android:id="@+id/textViewContent2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Please wait..." />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,6 +43,8 @@
             android:id="@+id/btnChangeRSS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
             android:text="Random RSS" />
     </LinearLayout>
 
