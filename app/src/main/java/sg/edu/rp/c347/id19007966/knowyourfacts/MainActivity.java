@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     ArrayList<Fragment> al;
@@ -68,10 +69,20 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else if (id == R.id.action_random) {
+            Random rnd = new Random();
+            viewPager.setCurrentItem(rnd.nextInt(3), true);
 
+
+            return true;
         }
         else if (id == R.id.action_next) {
+            int max = viewPager.getChildCount();
+            if(viewPager.getCurrentItem() < max-1){
+                int nextPage  = viewPager.getCurrentItem() + 1;
+                viewPager.setCurrentItem(nextPage, true);
 
+            }
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
